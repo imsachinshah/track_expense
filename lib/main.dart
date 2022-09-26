@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
+  TextEditingController titleController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
+
   List<Transaction> transactions = [
     Transaction(id: '1st', name: 'Chicken', date: DateTime.now(), price: 330),
     Transaction(id: '1st', name: 'Shopping', date: DateTime.now(), price: 5000)
@@ -42,22 +45,58 @@ class HomePage extends StatelessWidget {
             // decoration: BoxDecoration(
             //   color: Colors.red,
             // ),
+
             padding: const EdgeInsets.all(10),
             child: const Card(
               color: Colors.red,
               child: Text("Chart"),
             ),
           ),
+          Card(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
+                      labelText: 'Title',
+                      border: InputBorder.none,
+                      hintText: 'Kaha Udaya Paisa',
+                    ),
+                  ),
+                  TextField(
+                    controller: amountController,
+                    decoration: const InputDecoration(
+                      labelText: 'Amount',
+                      border: InputBorder.none,
+                      hintText: 'Kitna Udaya Paisa',
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      print(amountController.value);
+                    },
+                    child: const Text('Add Expense'),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: transactions.map((tx) {
               return Card(
+                elevation: 5,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(5),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      padding: const EdgeInsets.all(5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0),
                         border: Border.all(
