@@ -31,21 +31,23 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('KharchAAA'),
       ),
-      body: Column(
-        children: [
-          Container(
-            // decoration: BoxDecoration(
-            //   color: Colors.red,
-            // ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              // decoration: BoxDecoration(
+              //   color: Colors.red,
+              // ),
 
-            padding: const EdgeInsets.all(10),
-            child: const Card(
-              color: Colors.red,
-              child: Text("Chart"),
+              padding: const EdgeInsets.all(10),
+              child: const Card(
+                color: Colors.red,
+                child: Text("Chart"),
+              ),
             ),
-          ),
-          const UserTransaction()
-        ],
+            const UserTransaction()
+          ],
+        ),
       ),
     );
   }
