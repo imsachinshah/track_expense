@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:track_expense/widgets/new_transaction.dart';
 
-import 'package:track_expense/widgets/user_transaction.dart';
+import 'models/transaction.dart';
+import 'widgets/transaction_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,14 +24,65 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final List<Transaction> _userTransactions = [
+    Transaction(
+      id: '1st',
+      name: 'Chicken',
+      date: DateTime.now(),
+      price: 330,
+    ),
+    Transaction(
+      id: '2nd',
+      name: 'Shopping',
+      date: DateTime.now(),
+      price: 5000,
+    )
+  ];
+
+  void _addNewTransaction(String txName, double txPrice) {
+    final newTx = Transaction(
+      id: DateTime.now().toString(),
+      name: txName,
+      date: DateTime.now(),
+      price: txPrice,
+    );
+
+    setState(() {
+      _userTransactions.add(newTx);
+    });
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewTransaction(_addNewTransaction),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('KharchAAA'),
+        actions: [
+          IconButton(
+            onPressed: () => _startAddNewTransaction(context),
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -45,9 +98,16 @@ class HomePage extends StatelessWidget {
                 child: Text("Chart"),
               ),
             ),
-            const UserTransaction()
+            TransactionList(
+              transactions: _userTransactions,
+            ),
           ],
         ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _startAddNewTransaction(context),
+        child: const Icon(Icons.add),
       ),
     );
   }

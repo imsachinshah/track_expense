@@ -36,7 +36,7 @@ class TransactionList extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    '\$${transactions[index].price}',
+                    '\$${transactions[index].price.toStringAsFixed(2)}',
                     style: const TextStyle(color: Colors.red, fontSize: 20),
                   ),
                 ),
@@ -58,8 +58,7 @@ class TransactionList extends StatelessWidget {
               ],
             ),
           );
-        } ),
-        
+        }),
       ),
     );
   }
