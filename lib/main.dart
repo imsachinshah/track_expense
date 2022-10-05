@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "KharchAAA",
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
+        // colorScheme: const ColorScheme.light(),
       ),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
@@ -93,9 +94,9 @@ class _HomePageState extends State<HomePage> {
               // ),
 
               padding: const EdgeInsets.all(10),
-              child: const Card(
-                color: Colors.red,
-                child: Text("Chart"),
+              child: Card(
+                color: Theme.of(context).primaryColorLight,
+                child: const Text("Chart"),
               ),
             ),
             TransactionList(

@@ -32,12 +32,15 @@ class TransactionList extends StatelessWidget {
                     borderRadius: BorderRadius.circular(0),
                     border: Border.all(
                       width: 2,
-                      color: Colors.red,
+                      color: Theme.of(context).primaryColorDark,
                     ),
                   ),
                   child: Text(
                     '\$${transactions[index].price.toStringAsFixed(2)}',
-                    style: const TextStyle(color: Colors.red, fontSize: 20),
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorDark,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
                 Column(
