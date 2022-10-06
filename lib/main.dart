@@ -18,6 +18,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         // colorScheme: const ColorScheme.light(),
+        fontFamily: 'OpenSans',
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(fontFamily: 'Quicksand', fontSize: 20),
+        ),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
       ),
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
@@ -34,18 +45,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: '1st',
-      name: 'Chicken',
-      date: DateTime.now(),
-      price: 330,
-    ),
-    Transaction(
-      id: '2nd',
-      name: 'Shopping',
-      date: DateTime.now(),
-      price: 5000,
-    )
+    // Transaction(
+    //   id: '1st',
+    //   name: 'Chicken',
+    //   date: DateTime.now(),
+    //   price: 330,
+    // ),
+    // Transaction(
+    //   id: '2nd',
+    //   name: 'Shopping',
+    //   date: DateTime.now(),
+    //   price: 5000,
+    // )
   ];
 
   void _addNewTransaction(String txName, double txPrice) {
@@ -87,12 +98,9 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              // decoration: BoxDecoration(
-              //   color: Colors.red,
-              // ),
-
               padding: const EdgeInsets.all(10),
               child: Card(
                 color: Theme.of(context).primaryColorLight,
