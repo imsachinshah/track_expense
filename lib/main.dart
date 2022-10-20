@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:track_expense/widgets/new_transaction.dart';
 
 import 'models/transaction.dart';
+import 'widgets/chart.dart';
 import 'widgets/transaction_list.dart';
 
 void main() {
@@ -59,6 +60,16 @@ class _HomePageState extends State<HomePage> {
     // )
   ];
 
+  List<Transaction> get _recentTransactions {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+           const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
+
   void _addNewTransaction(String txName, double txPrice) {
     final newTx = Transaction(
       id: DateTime.now().toString(),
@@ -100,13 +111,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              child: Card(
-                color: Theme.of(context).primaryColorLight,
-                child: const Text("Chart"),
-              ),
-            ),
+            Chart(recentTransactions: _recentTransactions),
             TransactionList(
               transactions: _userTransactions,
             ),
